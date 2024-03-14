@@ -18,13 +18,12 @@ public class AddressStandardizationService {
      */
     public Mono<Address> standardizeAddress(final Address addressInput) {
         return Mono.just(addressInput)
-                .map(address ->
-                        new Address(StringUtils.toRootUpperCase(address.addressLine1()),
-                                StringUtils.toRootUpperCase(address.addressLine2()),
-                                StringUtils.toRootUpperCase(address.city()),
-                                StringUtils.toRootUpperCase(address.country()),
-                                StringUtils.toRootUpperCase(address.state()),
-                                StringUtils.toRootUpperCase(address.zipCode())));
+                .map(address -> new Address(StringUtils.toRootUpperCase(address.addressLine1()),
+                        StringUtils.toRootUpperCase(address.addressLine2()),
+                        StringUtils.toRootUpperCase(address.city()),
+                        StringUtils.toRootUpperCase(address.country()),
+                        StringUtils.toRootUpperCase(address.state()),
+                        StringUtils.toRootUpperCase(address.zipCode())));
     }
 
 }

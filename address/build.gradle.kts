@@ -1,18 +1,22 @@
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
     id("org.springframework.boot") version "3.2.3"
     id("io.spring.dependency-management") version "1.1.4"
+    id("com.google.cloud.tools.jib") version "3.4.1"
 }
 
+val imageRepoUser: String? by project
+val imageRepoPassword: String? by project
+
 application {
-    // Define the main class for the application.
     mainClass = "com.geico.ws.address.AddressAPIApplication"
 }
 
 dependencies {
-    implementation("org.apache.commons:commons-lang3:3.14.0")
+    implementation(libs.commons.lang3)
     implementation("org.springframework.boot:spring-boot-starter-graphql")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     // Use JUnit Jupiter for testing.
@@ -25,6 +29,29 @@ dependencies {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+jib {
+//    from {
+//        image = "mvisee/myjava:20240313-1"
+//        auth {
+//            username = imageRepoUser
+//            password = imageRepoPassword
+//        }
+//    }
+//    dockerClient {
+//        executable = "docker"
+//    }
+    from {
+        image = "docker://mvisee/myjava:20240313-1"
+    }
+    to {
+        image = "mvisee/testjib:20240314-3"
+        auth {
+            username = imageRepoUser
+            password = imageRepoPassword
+        }
     }
 }
 
