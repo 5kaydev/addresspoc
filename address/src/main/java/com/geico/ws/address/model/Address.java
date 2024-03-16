@@ -1,5 +1,8 @@
 package com.geico.ws.address.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 /**
  * Address record.
  *
@@ -10,6 +13,8 @@ package com.geico.ws.address.model;
  * @param state        State Name.
  * @param zipCode      zip code.
  */
+//@JsonDeserialize
+//@JsonIgnoreProperties(ignoreUnknown = true)
 public record Address(
         String addressLine1,
         String addressLine2,

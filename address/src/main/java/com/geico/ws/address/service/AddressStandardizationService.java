@@ -1,7 +1,7 @@
 package com.geico.ws.address.service;
 
+import com.geico.ws.address.dao.USPSService;
 import com.geico.ws.address.model.Address;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -10,6 +10,13 @@ import reactor.core.publisher.Mono;
  */
 @Service
 public class AddressStandardizationService {
+
+    private final USPSService uspsService;
+
+    public AddressStandardizationService(final USPSService uspsService) {
+        this.uspsService = uspsService;
+    }
+
     /**
      * Standardize Address.
      *
@@ -17,13 +24,7 @@ public class AddressStandardizationService {
      * @return The standardized address.
      */
     public Mono<Address> standardizeAddress(final Address addressInput) {
-        return Mono.just(addressInput)
-                .map(address -> new Address(StringUtils.toRootUpperCase(address.addressLine1()),
-                        StringUtils.toRootUpperCase(address.addressLine2()),
-                        StringUtils.toRootUpperCase(address.city()),
-                        StringUtils.toRootUpperCase(address.country()),
-                        StringUtils.toRootUpperCase(address.state()),
-                        StringUtils.toRootUpperCase(address.zipCode())));
+        return uspsService.standardizeAddress(addressInput);
     }
 
 }
