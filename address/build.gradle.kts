@@ -17,7 +17,6 @@ application {
 
 dependencies {
     implementation(libs.commons.lang3)
-    implementation(libs.starter.graphql)
     implementation(libs.starter.webflux)
 
     testImplementation(libs.junit.jupiter)
@@ -47,7 +46,7 @@ jib {
         image = "docker://myjava:20240316-1"
     }
     to {
-        image = "addresspoc-be-graphql:20240316-1"
+        image = "addresspoc-be-rest:20240316-1"
         auth {
             username = imageRepoUser
             password = imageRepoPassword
