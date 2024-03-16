@@ -1,6 +1,6 @@
 app:
   usps-service:
-    url: http://localhost:8081/graphql
+    url: http://localhost:8081/standardizeAddress
     #url: http://host.docker.internal:8081/graphql
 
 server:

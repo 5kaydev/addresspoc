@@ -47,7 +47,7 @@ jib {
         image = "docker://myjava:20240316-1"
     }
     to {
-        image = "addresspoc-fe-graphql:20240316-1"
+        image = "addresspoc-fe-rest:20240316-1"
         auth {
             username = imageRepoUser
             password = imageRepoPassword

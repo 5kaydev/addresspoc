@@ -2,7 +2,6 @@ package com.geico.ws.address.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.web.reactive.function.client.WebClient;
 
 /**
@@ -18,10 +17,8 @@ public class USPSServiceConfiguration {
     }
 
     @Bean
-    HttpGraphQlClient uspsClient(WebClient.Builder builder) {
-        return HttpGraphQlClient.builder(builder
-                        .baseUrl(uspsServiceProperties.getUrl())
-                        .build())
+    WebClient uspsClient(WebClient.Builder builder) {
+        return builder.baseUrl(uspsServiceProperties.getUrl())
                 .build();
     }
 }
