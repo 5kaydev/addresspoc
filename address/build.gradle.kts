@@ -3,9 +3,9 @@ import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
     application
-    id("org.springframework.boot") version "3.2.3"
-    id("io.spring.dependency-management") version "1.1.4"
-    id("com.google.cloud.tools.jib") version "3.4.1"
+    alias(libs.plugins.jib)
+    alias(libs.plugins.spring.boot)
+    alias(libs.plugins.spring.dependency.management)
 }
 
 val imageRepoUser: String? by project
@@ -17,9 +17,9 @@ application {
 
 dependencies {
     implementation(libs.commons.lang3)
-    implementation("org.springframework.boot:spring-boot-starter-graphql")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-    // Use JUnit Jupiter for testing.
+    implementation(libs.starter.graphql)
+    implementation(libs.starter.webflux)
+
     testImplementation(libs.junit.jupiter)
 
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
@@ -34,7 +34,7 @@ java {
 
 jib {
 //    from {
-//        image = "mvisee/myjava:20240313-1"
+//        image = "myjava:20240313-1"
 //        auth {
 //            username = imageRepoUser
 //            password = imageRepoPassword
@@ -44,10 +44,10 @@ jib {
 //        executable = "docker"
 //    }
     from {
-        image = "docker://mvisee/myjava:20240313-1"
+        image = "docker://myjava:20240316-1"
     }
     to {
-        image = "mvisee/testjib:20240314-3"
+        image = "addresspoc-be-graphql:20240316-1"
         auth {
             username = imageRepoUser
             password = imageRepoPassword
