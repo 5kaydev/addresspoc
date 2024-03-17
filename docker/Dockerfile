@@ -1,6 +1,6 @@
 FROM debian:stable-20240311
 
-COPY /usr/local/share/ca-certificates/zscaler-ca.crt /usr/local/share/ca-certificates/zscaler-ca.crt
+COPY zscaler-ca.crt /usr/local/share/ca-certificates/zscaler-ca.crt
 
 RUN apt-get update && \
     apt-get install -y gnupg ca-certificates curl && \
